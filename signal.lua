@@ -1,10 +1,9 @@
-
 rednet = require("Rednet")
 os = require("os")
 settings = require("settings")
 
 Signal = {id = 0, aspect = 0}
-Signal.__index = ConnectedComponents
+Signal.__index = Signal
 
 function Signal:new(o)
     o = o or {}
@@ -35,7 +34,7 @@ function Signal:getId()
 end
 
 function Signal:update()
-    ---check self.aspect and then set the proper redstone based on that
+    --check self.aspect and then set the proper redstone based on that
 end
 
 function init()
@@ -45,7 +44,12 @@ function init()
 function signal_listen()
     while true:
         local id, message = rednet.receive("signals")
-        if id == "signal_controller"
+        if id == "signal_controller" do
+            _, _, command, var, value = string.find(message, "(%a)%s(%a)%s(%a)")
+            if (command == "get") do
+                if "var" == "id" do
+                    rednet.send("")
+
 
     end
 
