@@ -45,10 +45,12 @@ function signal_listen()
     while true:
         local id, message = rednet.receive("signals")
         if id == "signal_controller" do
-            _, _, command, var, value = string.find(message, "(%a)%s(%a)%s(%a)")
+            _, _, command, key, value = string.find(message, "(%a)%s(%a)%s(%a)")
             if (command == "get") do
-                if "var" == "id" do
-                    rednet.send("")
+                if key == "id" do
+                    rednet.send("signal_controller", "ID " .. signal.getID())
+                else if key == "aspect" do
+                    
 
 
     end
